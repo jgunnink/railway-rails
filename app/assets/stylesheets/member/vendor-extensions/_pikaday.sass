@@ -1,0 +1,48 @@
+.pika-lendar
+  width: 260px
+
+.pika-single
+  border-color: $pikaday-border-color
+  color: $pikaday-font-color
+  font-family: $pikaday-font-stack
+
+.pika-title select
+  font-weight: $regular
+
+.pika-label
+  font-size: $em-base
+  font-weight: $semibold
+
+.pika-table
+  margin-bottom: 0
+
+  th
+    color: $pikaday-days-header-color
+
+  abbr
+    text-decoration: none
+
+.pika-button
+  background-color: $pikaday-day-background-color
+  font-size: em(14px)
+  padding: 7px 7px 8px
+
+  &:hover
+    // overriding !important pikaday styles
+    background-color: $pikaday-day-hover-background-color !important
+    border-radius: 0 !important
+
+  +when-inside(".is-today")
+    color: $pikaday-day-today-color
+
+  +when-inside(".is-selected")
+    background: $pikaday-day-selected-background-color
+    border-radius: 0
+    box-shadow: none
+    color: $pikaday-day-selected-color
+
+@if $pikaday-debug
+  .pika-single.is-hidden.is-bound
+    display: block
+    left: 10px
+    top: 10px

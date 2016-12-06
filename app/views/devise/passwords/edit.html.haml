@@ -1,0 +1,18 @@
+.ui.center.aligned.stackable.grid.container
+  .column
+    %h2.ui.top.attached.block.header= current_page_title
+
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), wrapper: "semantic_ui", html: { class: "ui form large left aligned attached segment", method: :put }) do |f|
+      .ui.error.message
+      = f.input :reset_password_token, as: :hidden
+      = f.input :password, label_html: {class: "visually-hidden"} do
+        .ui.left.icon.input
+          %i.lock.icon
+          = f.input_field :password, autofocus: true, autocomplete: "new-password", placeholder: "New password"
+      = f.input :password_confirmation, label_html: {class: "visually-hidden"} do
+        .ui.left.icon.input
+          %i.lock.icon
+          = f.input_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm new password"
+      = f.button :submit, "Change my password", class: "primary fluid large"
+
+    = render "devise/shared/links"

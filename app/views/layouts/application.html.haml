@@ -1,0 +1,39 @@
+!!! 5
+%html.no-js{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %title= page_title
+    = yield(:stylesheets)
+    = csrf_meta_tags
+    = favicon_link_tag "favicon.ico"
+    %meta{name: "viewport", content: "width=device-width,initial-scale=1"}
+
+  %body.pushable
+    = link_to "Skip to main content", "#skip-to-content", class: "visually-hidden"
+    %h1.visually-hidden= page_title
+
+    .ui.left.inverted.vertical.sidebar.menu
+      = yield(:navigation) if content_for?(:navigation)
+      = render partial: "layouts/authentication_navigation", locals: {item_class: "item"}
+
+    .pusher
+      .ui.inverted.vertical.masthead.center.aligned.segment
+        .ui.container
+          .ui.large.secondary.inverted.pointing.menu
+            %a.toc.item
+              %i.sidebar.icon
+              Menu
+            = yield(:navigation) if content_for?(:navigation)
+            .right.item
+              = render partial: "layouts/authentication_navigation", locals: {item_class: "ui inverted button"}
+
+        #skip-to-content
+          - if flash.any?
+            .ui.inverted.padded.vertical.segment
+              - flash.each do |key, value|
+                .ui{class: flash_class(key)}= value
+
+          = content_for?(:content) ? yield(:content) : yield
+
+    = yield(:javascripts)
+    = javascript_include_tag "easy-sign-in" if Rails.application.config.should_show_easy_login

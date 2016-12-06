@@ -1,0 +1,35 @@
+!!! 5
+%html.no-js{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %title= page_title
+    = stylesheet_link_tag 'admin', media: 'all'
+    = javascript_include_tag 'admin'
+    = csrf_meta_tags
+    = favicon_link_tag "favicon.ico"
+    %meta{name: "viewport", content: "width=device-width,initial-scale=1"}
+
+  %body.pushable
+    = link_to "Skip to main content", "#skip-to-content", class: "visually-hidden"
+
+    .ui.sidebar.inverted.vertical.menu
+      = render "layouts/admin/navigation"
+
+    .ui.fixed.inverted.main.menu
+      .ui.container
+        %a.item.sidebar-toggle
+          %i.sidebar.icon
+          Menu
+
+    .pusher
+      .ui.grid.container
+        .ui.left.fixed.vertical.inverted.menu
+          = render "layouts/admin/navigation"
+
+        .ui.main.grid
+          - flash.each do |key, value|
+            .ui.floating{class: flash_class(key)}
+              %i.close.icon
+              = value
+
+          = yield

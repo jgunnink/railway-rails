@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+.visually-hidden
+  @extend %visually-hidden
+
+[href="#skip-to-content"]:focus
+  background-color: #fff
+  clip: auto
+  height: auto
+  margin: auto
+  padding: $small-spacing
+  width: auto
+  z-index: 200
+
+.account
+  color: white(0.5)
+
+  &:hover, &:active
+    color: #fff
+
+.app-logo
+  display: inline-block
+  margin-bottom: 1rem
+  vertical-align: top
+
+  svg
+    stroke: #fff
+    width: 4rem

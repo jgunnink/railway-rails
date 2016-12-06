@@ -1,0 +1,33 @@
+en:
+  app:
+    name: "Rails Template"
+    owner: "The Frontier Group"
+
+  home:
+    index:
+      title: "Welcome"
+
+  dashboard:
+    index:
+      title: "My Dashboard"
+
+  admin:
+    dashboard:
+      index:
+        title: "Admin Dashboard"
+
+    admins:
+      index:
+        title: "Admins"
+      new:
+        title: "New Admin"
+      edit:
+        title: "Edit Admin: %{label}"
+
+    members:
+      index:
+        title: "Members"
+      new:
+        title: "New Member"
+      edit:
+        title: "Edit Member: %{label}"

@@ -1,0 +1,13 @@
+.ui.center.aligned.stackable.grid.container
+  .column
+    %h2.ui.top.attached.block.header= current_page_title
+
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), wrapper: "semantic_ui", html: { class: "ui form large left aligned attached segment", method: :post }) do |f|
+      .ui.error.message
+      = f.input :email, label_html: {class: "visually-hidden"} do
+        .ui.left.icon.input
+          %i.mail.icon
+          = f.input_field :email, placeholder: "E-mail address", autofocus: true
+      = f.button :submit, "Resend confirmation instructions", class: "primary fluid large"
+
+    = render "devise/shared/links"
