@@ -1,0 +1,14 @@
+.ui.row
+  .column
+    = simple_form_for @client, wrapper: "semantic_ui",
+      html: {class: "ui form"} do |f|
+      .two.fields
+        = f.input :name
+        = f.input :email
+      .two.fields
+        = f.input :contact_name
+        = f.input :contact_phone
+      .ui.buttons
+        = f.button :submit, class: "primary"
+        .or
+        = link_to "Cancel", clients_path, class: "ui button"

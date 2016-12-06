@@ -1,7 +1,7 @@
 en:
   app:
-    name: "Rails Template"
-    owner: "The Frontier Group"
+    name: "Railway"
+    owner: "JK Gunnink"
 
   home:
     index:
@@ -31,3 +31,11 @@ en:
         title: "New Member"
       edit:
         title: "Edit Member: %{label}"
+
+  clients:
+    new:
+      title: "New Client"
+    edit:
+      title: "Edit Client"
+    index:
+      title: "Client Management"

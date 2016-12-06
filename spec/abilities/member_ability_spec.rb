@@ -20,4 +20,10 @@ describe MemberAbility do
     it { should_not be_able_to(:manager, FactoryGirl.create(:user, :member)) }
   end
 
+  describe "managing Clients" do
+    it { should be_able_to(:create, FactoryGirl.create(:client)) }
+    it { should be_able_to(:update, FactoryGirl.create(:client)) }
+    it { should_not be_able_to(:destroy, FactoryGirl.create(:client)) }
+  end
+
 end
