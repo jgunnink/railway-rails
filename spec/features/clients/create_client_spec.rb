@@ -9,7 +9,7 @@ feature 'Admin can create a new Client' do
 
   before do
     visit(clients_path)
-    click_link("Add a client")
+    click_link("Add new client")
   end
 
   scenario 'with valid data' do

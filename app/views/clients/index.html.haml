@@ -10,8 +10,11 @@
 .ui.row
   .column
     - if params[:q].present? || @clients.present?
-      = search_form_for @ransack_query, method: :get, url: request.path, wrapper: "semantic_ui", html: { class: "search-form"} do |s|
-        = s.input :name, wrapper_html: {class: "ui action left icon input"}, label_html: {class: "visually-hidden"}, required: false, label: "Search by name or email" do
+      = search_form_for @ransack_query, method: :get, url: request.path,
+        wrapper: "semantic_ui", html: { class: "search-form"} do |s|
+        = s.input :name, wrapper_html: {class: "ui action left icon input"},
+          label_html: {class: "visually-hidden"}, required: false,
+          label: "Search by name" do
           %i.search.icon
           = s.input_field :name, placeholder: "Search by name", as: :string
           = s.button :button, "Search"
@@ -40,7 +43,9 @@
                       %i.pencil.icon
                       Edit
                   - if can?(:destroy, client)
-                    = link_to_archive_resource(delete_path_for_client(client), client.full_name)
+                    = link_to "Delete", client_path(client), method: :delete,
+                      data: {confirm: "Are you sure you want to delete this client?"},
+                      class: "ui icon tiny compact red button"
       = paginate @clients
 
     - elsif params[:q].present?
@@ -50,4 +55,4 @@
     - else
       %p
         There are no clients.
-        = link_to "Create a client.", new_path_for_client
+        = link_to "Create a client.", new_client_path

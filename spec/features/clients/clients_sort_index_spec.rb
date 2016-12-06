@@ -10,8 +10,7 @@ feature 'Admin can sort an index of clients' do
 
     visit_index
 
-    # Ascending
-    click_link("Name")
+    # Ascending is the default sort order
     expect_clients_to_be_ordered(first, second)
 
     # Descending
