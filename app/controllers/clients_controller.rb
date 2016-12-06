@@ -1,9 +1,9 @@
-class ClientsController < ApplicationController
-  before_action :authenticate_user!
+class ClientsController < AuthenticatedController
 
   def index
     authorize!(:index, Client)
     @ransack_query = Client.ransack(params[:q])
+    @ransack_query.sorts = 'name ASC' if @ransack_query.sorts.empty?
     @clients = Client.all.merge(@ransack_query.result)
                          .page(params[:page])
   end
@@ -24,6 +24,11 @@ class ClientsController < ApplicationController
   def edit
     @client = find_client
     authorize!(:edit, @client)
+  end
+
+  def show
+    @client = find_client
+    authorize!(:show, @client)
   end
 
   def update
