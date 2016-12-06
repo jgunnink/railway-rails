@@ -6,6 +6,8 @@ class MemberAbility < BaseAbility
     cannot :show, :admin_controllers
     cannot :show, :admin_dashboard
     can :show, :user_dashboard
+    can :manage, Client
+    cannot :destroy, Client
   end
 
 end

@@ -1,0 +1,10 @@
+= simple_form_for @client, wrapper: "horizontal", html: {class: "form-horizontal"} do |f|
+
+  = f.input :name
+  = f.input :email
+  = f.input :contact_name
+  = f.input :contact_phone
+  .form-actions
+    = f.button :submit
+    %span.or or
+    = link_to "Cancel", clients_path

@@ -1,0 +1,32 @@
+client:
+  authorization: cancancan
+
+  attributes:
+    name:
+      sortable: true
+      type: string
+      validates:
+        length:
+          maximum: 50
+        presence: true
+        uniqueness: true
+    email:
+      type: string
+      validates:
+        length:
+          minimum: 6
+        presence: true
+        uniqueness: true
+    contact_name:
+      type: string
+      validates:
+        length:
+          minimum: 2
+          maximum: 30
+        presence: true
+    contact_phone:
+      type: string
+      validates:
+        length:
+          minimum: 8
+          maximum: 20

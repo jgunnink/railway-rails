@@ -1,0 +1,34 @@
+.content-header
+  %h1 Client Management
+  .collection-actions
+    - if can?(:new, Client)
+      = link_to "Add a client", new_client_path, class: "btn"
+
+- if @clients.exists?
+  %table
+    %thead
+      %tr
+        %th= sort_link(@ransack_query, :name, "Name")
+        %th Email
+        %th Contact Name
+        %th Contact Phone
+        %th.actions Actions
+    %tbody
+      - @clients.each do |client|
+        %tr
+          %td= client.name
+          %td= client.email
+          %td= client.contact_name
+          %td= client.contact_phone
+          %td.actions
+            - if can?(:edit, client)
+              = link_to("Edit", edit_client_path(client), class: "btn btn-small")
+            - if can?(:destroy, client)
+              = link_to("Delete", client_path(client), method: :delete, data: {confirm: "Are you sure you want to delete this client?"}, class: "btn btn-small btn-danger")
+
+  = paginate @clients
+- else
+  %p
+    There are no clients.
+    - if can?(:new, Client)
+      = link_to("Add a client.", new_client_path)

@@ -15,4 +15,10 @@ describe AdminAbility do
     it { should_not be_able_to(:show, :user_dashboard) }
   end
 
+  describe "managing Clients" do
+    it { should be_able_to(:create, FactoryGirl.create(:client)) }
+    it { should be_able_to(:update, FactoryGirl.create(:client)) }
+    it { should be_able_to(:destroy, FactoryGirl.create(:client)) }
+  end
+
 end
