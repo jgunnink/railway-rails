@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   MAX_NAME_LENGTH = 255
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :trackable, :confirmable
 
   # Soft delete - uses deleted_at field
   acts_as_paranoid
