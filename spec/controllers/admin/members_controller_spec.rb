@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::MembersController do
 
-  describe 'GET index' do
+  describe "GET index" do
     subject(:get_index) { get :index, params }
     let(:params) { {} }
 
@@ -23,7 +23,7 @@ RSpec.describe Admin::MembersController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'GET new' do
+  describe "GET new" do
     subject { get :new }
 
     authenticated_as(:admin) do
@@ -34,7 +34,7 @@ RSpec.describe Admin::MembersController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'POST create' do
+  describe "POST create" do
     subject(:create_user) { post :create, user: params }
     let(:params) { {} }
 
@@ -74,7 +74,7 @@ RSpec.describe Admin::MembersController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'GET edit' do
+  describe "GET edit" do
     subject { get :edit, id: target_user.id }
     let(:target_user) { FactoryGirl.create(:user, :member) }
 
@@ -86,10 +86,10 @@ RSpec.describe Admin::MembersController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'POST update' do
+  describe "POST update" do
     subject(:update_user) { post :update, id: target_user.id, user: params }
     let(:params) { {} }
-    let(:target_user) { FactoryGirl.create(:user, :member) }
+    let(:target_user) { FactoryGirl.create(:user, :member, email: "pending@example.com") }
 
     authenticated_as(:admin) do
 
@@ -103,11 +103,12 @@ RSpec.describe Admin::MembersController do
           }
         end
 
-        it "creates a User object with the given attributes" do
+        it "updates a User object with the given attributes" do
           update_user
 
           target_user.reload
-          expect(target_user.email).to eq("jk@example.com")
+          # When we update the user, the new email is not changed until confirmed.
+          expect(target_user.email).to eq("pending@example.com")
           expect(target_user.given_names).to eq("JK")
           expect(target_user.family_name).to eq("Gunnink")
           expect(target_user).to be_member
@@ -134,7 +135,7 @@ RSpec.describe Admin::MembersController do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
-  describe 'DELETE destroy' do
+  describe "DELETE destroy" do
     subject { delete :destroy, id: target_user.id }
     let(:target_user) { FactoryGirl.create(:user, :member) }
 

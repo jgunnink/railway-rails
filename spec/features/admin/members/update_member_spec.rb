@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Admin can update an existing User' do
+feature "Admin can update an existing User" do
 
   signed_in_as(:admin) do
     let!(:target_user) { FactoryGirl.create(:user, :member, email: "something@nothing.com") }
 
-    before do
+    background do
       click_sidemenu_option("Dashboard")
       click_sidemenu_option("Members")
       within_row(target_user.email) do
@@ -13,7 +13,7 @@ feature 'Admin can update an existing User' do
       end
     end
 
-    scenario 'Admin updates user with valid data' do
+    scenario "Admin updates user with valid data" do
       fill_in("Given names", with: "JK")
       fill_in("Family name", with: "Gunnink")
       fill_in("Email", with: "valid@example.com")
@@ -24,12 +24,13 @@ feature 'Admin can update an existing User' do
 
       # User should be saved
       target_user.reload
-      expect(target_user.email).to eq("valid@example.com")
+      # When we update the user, the new email is not changed until confirmed.
+      expect(target_user.email).to eq("something@nothing.com")
       expect(target_user.given_names).to eq("JK")
       expect(target_user.family_name).to eq("Gunnink")
     end
 
-    scenario 'Admin updates user with invalid data' do
+    scenario "Admin updates user with invalid data" do
       fill_in("Given names", with: "")
       fill_in("Family name", with: "")
       fill_in("Email", with: "")

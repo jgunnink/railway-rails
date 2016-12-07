@@ -6,6 +6,7 @@ FactoryGirl.define do
     family_name { FFaker::Name.last_name }
     password    "password"
     role        "member"
+    confirmed_at { Time.current }
 
     trait :admin do
       role "admin"
@@ -13,6 +14,10 @@ FactoryGirl.define do
 
     trait :member do
       role "member"
+    end
+
+    trait :unconfirmed do
+      confirmed_at { nil }
     end
   end
 

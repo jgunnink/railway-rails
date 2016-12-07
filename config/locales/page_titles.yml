@@ -1,11 +1,10 @@
 en:
   app:
-    name: "Railway"
-    owner: "JK Gunnink"
+    owner: "Studio Orange"
 
   home:
     index:
-      title: "Welcome"
+      title: "Railway"
 
   dashboard:
     index:

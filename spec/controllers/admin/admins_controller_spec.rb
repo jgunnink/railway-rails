@@ -89,7 +89,7 @@ RSpec.describe Admin::AdminsController do
   describe 'POST update' do
     subject(:update_user) { post :update, id: target_user.id, user: params }
     let(:params) { {} }
-    let(:target_user) { FactoryGirl.create(:user, :admin) }
+    let(:target_user) { FactoryGirl.create(:user, :admin, email: "pending@example.com") }
 
     authenticated_as(:admin) do
 
@@ -103,11 +103,12 @@ RSpec.describe Admin::AdminsController do
           }
         end
 
-        it "creates a User object with the given attributes" do
+        it "updates a User object with the given attributes" do
           update_user
 
           target_user.reload
-          expect(target_user.email).to eq("jk@example.com")
+          # When we update the user, the new email is not changed until confirmed.
+          expect(target_user.email).to eq("pending@example.com")
           expect(target_user.given_names).to eq("JK")
           expect(target_user.family_name).to eq("Gunnink")
           expect(target_user).to be_admin
