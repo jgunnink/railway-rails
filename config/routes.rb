@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     resources :admins
   end
 
-  resources :clients
+  resources :clients do
+    resources :projects
+  end
 
   get "dashboard", to: "dashboard#index"
 

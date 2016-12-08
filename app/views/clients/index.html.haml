@@ -42,6 +42,9 @@
                     = link_to edit_client_path(client), class: "ui icon tiny compact button" do
                       %i.pencil.icon
                       Edit
+                    = link_to client_projects_path(client), class: "ui icon tiny teal compact button" do
+                      %i.flag.icon
+                      Projects
                   - if can?(:destroy, client)
                     = link_to "Delete", client_path(client), method: :delete,
                       data: {confirm: "Are you sure you want to delete this client?"},

@@ -38,3 +38,11 @@ en:
       title: "Edit Client"
     index:
       title: "Client Management"
+
+  projects:
+    new:
+      title: "New Client Project"
+    edit:
+      title: "Edit Client Project"
+    index:
+      title: "Client Projects"
