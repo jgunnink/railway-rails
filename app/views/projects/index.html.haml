@@ -33,6 +33,9 @@
               - if can?(:manage, project)
                 %td.right.aligned.actions
                   - if can?(:edit, project)
+                    = link_to client_project_path(@client, project), class: "ui icon tiny teal compact button" do
+                      %i.eye.icon
+                      View
                     = link_to edit_client_project_path(@client, project), class: "ui icon tiny compact button" do
                       %i.pencil.icon
                       Edit

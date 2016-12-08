@@ -46,3 +46,5 @@ en:
       title: "Edit Client Project"
     index:
       title: "Client Projects"
+    show:
+      title: "%{label}"
