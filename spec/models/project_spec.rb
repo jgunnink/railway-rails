@@ -11,6 +11,10 @@ describe Project do
     end
   end
 
+  describe "@client" do
+    it { should validate_presence_of(:client) }
+  end
+
   describe "#to_s" do
     subject { Project.new(name: "Name").to_s }
     it { should eq("Name") }

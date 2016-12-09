@@ -1,31 +1,32 @@
 require 'rails_helper'
 
 describe ProjectsController do
+  let!(:client) { FactoryGirl.create(:client) }
 
   describe 'GET index' do
-    subject { get :index }
+    subject { get :index, client_id: client.id }
 
     authenticated_as(:admin) do
       it { should render_template(:index) }
     end
 
     it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
+    it_behaves_like "action authorizes roles", [:admin, :member]
   end
 
   describe 'GET new' do
-    subject { get :new }
+    subject { get :new, client_id: client.id }
 
     authenticated_as(:admin) do
       it { should render_template(:new) }
     end
 
     it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
+    it_behaves_like "action authorizes roles", [:admin, :member]
   end
 
   describe 'POST create' do
-    subject { post :create, project: attributes }
+    subject { post :create, project: attributes, client_id: client.id }
     let(:attributes) { {} }
 
     authenticated_as(:admin) do
@@ -49,7 +50,7 @@ describe ProjectsController do
           expect(project.client).to eq(client)
         end
 
-        it { should redirect_to(client_projects_path(client_id)) }
+        it { should redirect_to(client_projects_path(client)) }
 
         it "sets a notice for the user" do
           subject
@@ -64,11 +65,11 @@ describe ProjectsController do
     end
 
     it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
+    it_behaves_like "action authorizes roles", [:admin, :member]
   end
 
   describe 'GET edit' do
-    subject { get :edit, id: project.id }
+    subject { get :edit, id: project.id, client_id: client.id }
     let!(:project) { FactoryGirl.create(:project) }
 
     authenticated_as(:admin) do
@@ -76,11 +77,11 @@ describe ProjectsController do
     end
 
     it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
+    it_behaves_like "action authorizes roles", [:admin, :member]
   end
 
   describe 'POST update' do
-    subject { post :update, id: project.id, project: attributes }
+    subject { post :update, id: project.id, project: attributes, client_id: client.id }
     let!(:project) { FactoryGirl.create(:project) }
 
     let(:attributes) { {} }
@@ -105,7 +106,7 @@ describe ProjectsController do
           expect(project.client).to eq(client)
         end
 
-        it { should redirect_to(client_projects_path(client_id)) }
+        it { should redirect_to(client_projects_path(client)) }
 
         it "sets a notice for the user" do
           subject
@@ -124,11 +125,11 @@ describe ProjectsController do
     end
 
     it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
+    it_behaves_like "action authorizes roles", [:admin, :member]
   end
 
   describe 'DELETE destroy' do
-    subject { delete :destroy, id: project.id }
+    subject { delete :destroy, id: project.id, client_id: client.id }
     let!(:project) { FactoryGirl.create(:project) }
 
     authenticated_as(:admin) do
@@ -136,7 +137,7 @@ describe ProjectsController do
         subject
         expect(project.reload.deleted_at).to be_present
       end
-      it { should redirect_to(client_projects_path(client_id)) }
+      it { should redirect_to(client_projects_path(client)) }
     end
 
     it_behaves_like "action requiring authentication"

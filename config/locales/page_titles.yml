@@ -45,6 +45,6 @@ en:
     edit:
       title: "Edit Client Project"
     index:
-      title: "Client Projects"
+      title: "%{label} Projects"
     show:
       title: "%{label}"

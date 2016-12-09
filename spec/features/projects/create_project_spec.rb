@@ -1,18 +1,18 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'Admin can create a new Project' do
+feature "User can create a new Project" do
 
-  sign_in_as(:admin)
+  sign_in_as(:member)
 
   let(:project_attributes) { FactoryGirl.attributes_for(:project) }
   let!(:client) { FactoryGirl.create(:client) }
 
   before do
-    visit(client_projects_path(client_id))
-    click_link("Add a project")
+    visit(client_projects_path(client))
+    click_link("Add new project")
   end
 
-  scenario 'with valid data' do
+  scenario "with valid data" do
     fill_in("Name", with: project_attributes[:name])
     select(client, from: "Client")
 
