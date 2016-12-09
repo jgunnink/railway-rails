@@ -3,9 +3,9 @@ class ProjectsController < AuthenticatedController
 
   def index
     authorize!(:index, Project)
-    @ransack_query = Project.ransack(params[:q])
-    @projects = Project.where(client_id: params[:client_id]).merge(@ransack_query.result)
-                           .page(params[:page])
+    @projects = Project.where(client: params[:client_id])
+    @ransack_query = @projects.ransack(params[:q])
+    @projects = @ransack_query.result.page(params[:page])
   end
 
   def new
