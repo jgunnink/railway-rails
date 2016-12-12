@@ -35,15 +35,15 @@ en:
     new:
       title: "New Client"
     edit:
-      title: "Edit Client"
+      title: "Edit Client: %{label}"
     index:
       title: "Client Management"
 
   projects:
     new:
-      title: "New Client Project"
+      title: "New Project for %{label}"
     edit:
-      title: "Edit Client Project"
+      title: "Edit %{label}"
     index:
       title: "%{label} Projects"
     show:

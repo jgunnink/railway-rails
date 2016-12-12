@@ -1,6 +1,6 @@
 .ui.row.page-header
   .column
-    %h1.ui.left.floated.header= current_page_title
+    %h1.ui.left.floated.header= current_page_title(@client)
     - if can?(:new, Project)
       .ui.right.floated.page.header
         = link_to new_client_project_path(@client), class: "ui teal button" do
