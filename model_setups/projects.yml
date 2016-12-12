@@ -1,0 +1,15 @@
+project:
+  authorization: cancancan
+
+  attributes:
+    name:
+      sortable: true
+      type: string
+      validates:
+        length:
+          maximum: 100
+        presence: true
+        uniqueness:
+          scope: client_id
+    client:
+      type: "belongs_to"

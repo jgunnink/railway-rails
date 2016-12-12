@@ -11,23 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207060358) do
+ActiveRecord::Schema.define(version: 20161208081729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "contact_name"
+    t.string   "name",          null: false
+    t.string   "email",         null: false
+    t.string   "contact_name",  null: false
     t.string   "contact_phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.datetime "deleted_at"
   end
 
   add_index "clients", ["deleted_at"], name: "index_clients_on_deleted_at", using: :btree
   add_index "clients", ["name"], name: "index_clients_on_name", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "client_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+  end
+
+  add_index "projects", ["client_id"], name: "index_projects_on_client_id", using: :btree
+  add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
+  add_index "projects", ["name"], name: "index_projects_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                              default: "", null: false
@@ -57,4 +69,5 @@ ActiveRecord::Schema.define(version: 20161207060358) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "projects", "clients"
 end

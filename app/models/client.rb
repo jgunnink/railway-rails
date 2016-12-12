@@ -8,6 +8,8 @@ class Client < ActiveRecord::Base
   validates :email, length: {minimum: 6}, presence: true, uniqueness: true
   validates :name, length: {maximum: 50}, presence: true, uniqueness: true
 
+  has_many :projects, inverse_of: :client
+
   def to_s
     name
   end

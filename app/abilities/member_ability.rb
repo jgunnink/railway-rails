@@ -8,6 +8,8 @@ class MemberAbility < BaseAbility
     can :show, :user_dashboard
     can :manage, Client
     cannot :destroy, Client
+    can :manage, Project
+    cannot :destroy, Project
   end
 
 end
