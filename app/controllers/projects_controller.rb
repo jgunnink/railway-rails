@@ -15,6 +15,7 @@ class ProjectsController < AuthenticatedController
 
   def create
     @project = Project.new(strong_params_for_project)
+    @project.client_id = params[:client_id]
     authorize!(:create, @project)
     @project.save
 

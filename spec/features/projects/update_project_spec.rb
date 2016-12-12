@@ -16,7 +16,6 @@ feature "Admin can update an existing Project" do
 
   scenario "with valid data" do
     fill_in("Name", with: project_attributes[:name])
-    select(client, from: "Client")
 
     submit_form
 
@@ -28,12 +27,10 @@ feature "Admin can update an existing Project" do
 
   scenario "with invalid data" do
     fill_in("Name", with: "")
-    select("", from: "Client")
 
     submit_form
 
     expect(page).to have_flash :alert, "Project could not be updated. Please address the errors below."
-    expect(page).to have_error_message(:client, "can't be blank")
     expect(page).to have_error_message(:name, "can't be blank")
 
     project.reload

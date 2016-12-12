@@ -2,10 +2,7 @@
   .column
     = simple_form_for [@client, @project], wrapper: "semantic_ui",
       html: {class: "ui form"} do |f|
-      .two.fields
-        - if @project.present?
-          = f.association :client, collection: Client.all
-        = f.input :name
+      = f.input :name
       .ui.buttons
         = f.button :submit, class: "teal"
         .or

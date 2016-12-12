@@ -14,7 +14,6 @@ feature "User can create a new Project" do
 
   scenario "with valid data" do
     fill_in("Name", with: project_attributes[:name])
-    select(client, from: "Client")
 
     submit_form
 
