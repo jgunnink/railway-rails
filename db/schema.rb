@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20161208081729) do
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "contact_name"
+    t.string   "name",          null: false
+    t.string   "email",         null: false
+    t.string   "contact_name",  null: false
     t.string   "contact_phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.datetime "deleted_at"
   end
 
