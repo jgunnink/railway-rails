@@ -18,6 +18,10 @@
           %i.search.icon
           = s.input_field :name_cont, placeholder: "Search by name", as: :string
           = s.button :button, "Search"
+      - if params[:q].present? && @projects.present?
+        %p
+          You are viewing search results, which is subset of all possible projects.
+          = link_to "View all projects", request.path
 
     - if @projects.present?
       %table.ui.fixed.striped.table

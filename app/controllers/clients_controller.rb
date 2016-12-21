@@ -2,10 +2,10 @@ class ClientsController < AuthenticatedController
 
   def index
     authorize!(:index, Client)
-    @ransack_query = Client.ransack(params[:q])
+    @clients = Client.all
+    @ransack_query = @clients.ransack(params[:q])
     @ransack_query.sorts = 'name ASC' if @ransack_query.sorts.empty?
-    @clients = Client.all.merge(@ransack_query.result)
-                         .page(params[:page])
+    @clients = @ransack_query.result.page(params[:page])
   end
 
   def new
