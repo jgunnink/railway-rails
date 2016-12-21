@@ -18,7 +18,6 @@ feature "User can view an index of Projects" do
     end
 
     context "user searches for project" do
-
       scenario "where the user searches for a matching project" do
         fill_in "Search by name", with: "The Green Hills of Stranglethorn"
         click_on "Search"
