@@ -1,5 +1,5 @@
 class ProjectsController < AuthenticatedController
-  before_action :find_client
+  before_action :find_client, except: :open_projects
 
   def index
     authorize!(:index, Project)
@@ -25,6 +25,13 @@ class ProjectsController < AuthenticatedController
   def edit
     @project = find_project
     authorize!(:edit, @project)
+  end
+
+  def open_projects
+    authorize!(:index, Project)
+    @projects = Project.all
+    @ransack_query = @projects.ransack(params[:q])
+    @projects = @ransack_query.result.page(params[:page])
   end
 
   def show

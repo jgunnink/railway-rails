@@ -14,6 +14,17 @@ describe ProjectsController do
     it_behaves_like "action authorizes roles", [:admin, :member]
   end
 
+  describe 'GET open_projects' do
+    subject { get :open_projects }
+
+    authenticated_as(:admin) do
+      it { should render_template(:open_projects) }
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin, :member]
+  end
+
   describe 'GET new' do
     subject { get :new, client_id: client.id }
 

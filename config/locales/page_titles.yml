@@ -48,3 +48,5 @@ en:
       title: "%{label} Projects"
     show:
       title: "%{label}"
+    open_projects:
+      title: "All projects"

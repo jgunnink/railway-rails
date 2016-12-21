@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :clients do
     resources :projects
   end
+  get "open_projects", as: "open_client_projects", controller: "projects"
 
   get "dashboard", to: "dashboard#index"
 
