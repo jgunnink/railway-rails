@@ -19,18 +19,20 @@
         %thead
           %tr
             %th= sort_link(@ransack_query, :name, "Name")
+            %th Client
             - if can?(:manage, Project)
               %th.right.aligned.actions Actions
         %tbody
           - @projects.each do |project|
             %tr
               %td= project.name
+              %td= link_to "#{project.client}", client_path(project.client)
               - if can?(:manage, project)
                 %td.right.aligned.actions
                   - if can?(:edit, project)
                     = link_to client_project_path(project.client, project), class: "ui icon tiny teal compact button" do
                       %i.eye.icon
-                      View
+                      View project
                     = link_to edit_client_project_path(project.client, project), class: "ui icon tiny compact button" do
                       %i.pencil.icon
                       Edit
