@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
 
   validates :client, presence: true
   validates :name, length: {maximum: 100}, presence: true, uniqueness: {scope: :client_id}
+  validates :stage, numericality: { only_integer: true, greater_than: 0, less_than: 6 }
 
   def to_s
     name
