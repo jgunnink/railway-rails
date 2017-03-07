@@ -43,6 +43,7 @@ class ProjectsController < AuthenticatedController
     @project = find_project
     @project.assign_attributes(strong_params_for_project)
     authorize!(:update, @project)
+    @project.stage += 1 if params[:stage_progress]
     @project.save
 
     respond_with(@project, location: client_projects_path(@client))

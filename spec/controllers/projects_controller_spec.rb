@@ -92,9 +92,10 @@ describe ProjectsController do
   end
 
   describe 'POST update' do
-    subject { post :update, id: project.id, project: attributes, client_id: client.id }
-    let!(:project) { FactoryGirl.create(:project) }
-
+    subject { post :update, id: project.id, project: attributes, client_id: client.id, stage_progress: stage_progress }
+    let!(:project) { FactoryGirl.create(:project, stage: 1) }
+    let(:stage_progress) { false }
+    
     let(:attributes) { {} }
 
     authenticated_as(:admin) do
@@ -122,6 +123,16 @@ describe ProjectsController do
         it "sets a notice for the user" do
           subject
           expect(flash[:notice]).to be_present
+        end
+
+        context "when the project stage parameter is included" do
+          let!(:stage_progress) { true }
+          it "progresses the project stage" do
+            subject
+            expect(flash[:notice]).to be_present
+
+            expect(project.reload.stage).to eq(2)
+          end
         end
       end
 

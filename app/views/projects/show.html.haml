@@ -1,5 +1,17 @@
 .ui.row.page-header
-  .column
-    %h1.ui.left.floated.header= current_page_title(@project)
+	.column
+		%h1.ui.left.floated.header= current_page_title(@project)
 
-%p Data about the project will go here. This will be the main project page.
+.ui.row
+	%h2= "Project stage: #{@project.stage}"
+
+.ui.row
+	%p Data about the project will go here. This will be the main project page.
+
+.ui.row
+	%i
+	= link_to client_project_path(@project.client, @project, stage_progress: true),	method: :patch,
+		data: {confirm: "Are you sure you want to proceed to the next stage?"},
+		class: "ui icon teal button" do
+		%i.right.arrow.icon
+		Complete stage
